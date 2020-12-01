@@ -3,6 +3,7 @@ import "./App.css";
 import TOC from "./components/TOC";
 import Subject from "./components/Subject";
 import Contents from "./components/Contents";
+import Control from "./components/Control";
 
 // 클래스 소속시 function 생략
 // 하나의 최상위 태그
@@ -12,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: "welcome",
+      mode: "read",
       Subject: { title: "web", sub: "World wid web!" },
       welcome: { title: "Welcome", desc: "Hello,React!!!" },
       Contents: [
@@ -36,31 +37,24 @@ class App extends Component {
 
     return (
       <div className="App">
-        {/* <Subject
+        <Subject
           title={this.state.Subject.title}
           sub={this.state.Subject.sub}
-        ></Subject> */}
-        <header>
-          <h1>
-            <a
-              href="/"
-              onClick={function (e) {
-                e.preventDefault();
-                // this.state.mode = 'welcome'
-                this.setState({
-                  mode: "welcome",
-                });
+          onChangePage={function () {
+            this.setState({ mode: "welcome" });
+          }.bind(this)}
+        ></Subject>
 
-                // 이벤트 함수 안에서 this가 자기자신 가르키지 않음
-              }.bind(this)}
-            >
-              {this.state.Subject.title}
-            </a>
-          </h1>
-          {this.state.Subject.sub}
-        </header>
-        );
-        <TOC data={this.state.Contents}></TOC>
+        <TOC
+          onChange={function (id) {
+            this.setState({
+              mode: "read",
+              selected_contente_id: Number(id),
+            });
+          }.bind(this)}
+          data={this.state.contents}
+        ></TOC>
+        <Control onChangeMode={function () {}.bind(this)}></Control>
         <Contents title={_title} desc={_desc}></Contents>
       </div>
     );
