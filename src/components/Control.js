@@ -7,9 +7,9 @@ class Control extends Component {
         <li>
           <a
             href="/create"
-            onClick={function (e) {
+            conClick={function (e) {
               e.preventDefault();
-              this.props.onchangeMode("create");
+              this.props.onChangeMode("create");
             }.bind(this)}
           >
             create
@@ -18,19 +18,19 @@ class Control extends Component {
         <li>
           <a
             href="/update"
-            onClick={function (e) {
+            conClick={function (e) {
               e.preventDefault();
-              this.props.onchangeMode("update");
+              this.props.onChangeMode("update");
             }.bind(this)}
           >
-            create
+            update
           </a>
         </li>
         <li>
           <input
-            onClick={function (e) {
+            conClick={function (e) {
               e.preventDefault();
-              this.props.onchangeMode("delete");
+              this.props.onChangeMode("delete");
             }.bind(this)}
             type="button"
             value="delete"

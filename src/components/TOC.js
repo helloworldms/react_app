@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class TOC extends Component {
+class Toc extends Component {
   render() {
     let lists = [];
     const data = this.props.data;
@@ -12,13 +12,13 @@ class TOC extends Component {
         </li>
       );
       i = i + 1;
+      return (
+        <nav>
+          <ul>{lists}</ul>
+        </nav>
+      );
     }
-    return (
-      <nav>
-        <ul>{lists}</ul>
-      </nav>
-    );
   }
 }
 
-export default TOC;
+export default Toc;

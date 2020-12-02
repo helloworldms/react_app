@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import TOC from "./components/TOC";
+import Toc from "./components/Toc";
 import Subject from "./components/Subject";
 import Contents from "./components/Contents";
 import Control from "./components/Control";
@@ -13,7 +13,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: "read",
+      //스테이트 값 변경 > 랜더 재 호출
+      // value
+      mode: "welcome",
+      selected_contetn_id: 2,
       Subject: { title: "web", sub: "World wid web!" },
       welcome: { title: "Welcome", desc: "Hello,React!!!" },
       Contents: [
@@ -31,12 +34,38 @@ class App extends Component {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
     } else if (this.state.mode === "read") {
+      var i = 0;
+      while (i < this.state.contents.length) {
+        var data = this.state.contents[i];
+        if (data.id === this.state.selected_contetn_id) {
+          _title = data.title;
+          _desc = data.desc;
+          break;
+        }
+        i = i + 1;
+      }
       _title = this.state.Contents[0].title;
       _desc = this.state.Contents[0].desc;
     }
 
     return (
       <div className="App">
+        {/* <header>
+          <h1>
+            <a
+              href="/"
+              onClick={function (e) {
+                e.preventDefault();
+                this.setState({
+                  mode: "welcome",
+                });
+              }.bind(this)}
+            >
+              {this.state.Subject.title}
+            </a>
+          </h1>
+          {this.state.Subject.sub}
+        </header> */}
         <Subject
           title={this.state.Subject.title}
           sub={this.state.Subject.sub}
@@ -45,7 +74,7 @@ class App extends Component {
           }.bind(this)}
         ></Subject>
 
-        <TOC
+        <Toc
           onChange={function (id) {
             this.setState({
               mode: "read",
@@ -53,8 +82,9 @@ class App extends Component {
             });
           }.bind(this)}
           data={this.state.contents}
-        ></TOC>
-        <Control onChangeMode={function () {}.bind(this)}></Control>
+        ></Toc>
+        <Control onChageMode={function (mode) {}.bind(this)}></Control>
+
         <Contents title={_title} desc={_desc}></Contents>
       </div>
     );
