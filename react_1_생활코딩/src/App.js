@@ -4,14 +4,15 @@ import ReadContent from "./Components/ReadContent";
 import Subject from "./Components/Subject";
 import Control from "./Components/Control";
 import CreateContent from "./Components/CreateContent";
+import UpdateContents from "./Components/UpdateContents";
 
 class App extends Component {
   constructor(props) {
     super(props);
     // 스테이트 값 초기화 / 컴포넌터 실행될때 랜더  컨스트럭터 가장 먼저 실행 / 프롭스로 전달하기 위한 정보
-
+    this.max_content_id = 3;
     this.state = {
-      mode: "read",
+      mode: "update",
       selected_content_id: 2,
       welcome: { title: "welcome", desc: "Hello, React" },
       subject: { title: "web", sub: "world wide web" },
@@ -44,7 +45,33 @@ class App extends Component {
       }
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
     } else if (this.state.mode === "create") {
-      _article = <CreateContent></CreateContent>;
+      _article = (
+        <CreateContent
+          onSubmit={function (_title, _desc) {
+            this.max_content_id = this.max_content_id + 1;
+            var _contesnts = this.state.contents.concat({
+              id: this.max_content_id,
+              title: _title,
+              desc: _desc,
+            });
+            this.setState({ contents: _contesnts });
+          }.bind(this)}
+        ></CreateContent>
+      );
+    } else if (this.state.mode === "update") {
+      _article = (
+        <UpdateContents
+          onSubmit={function (_title, _desc) {
+            this.max_content_id = this.max_content_id + 1;
+            var _contesnts = this.state.contents.concat({
+              id: this.max_content_id,
+              title: _title,
+              desc: _desc,
+            });
+            this.setState({ contents: _contesnts });
+          }.bind(this)}
+        ></UpdateContents>
+      );
     }
     return (
       <div className="App">

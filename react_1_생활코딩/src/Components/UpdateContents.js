@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-class CreateContent extends Component {
+class UpdateContents extends Component {
   render() {
     return (
       <article>
-        <h2>Create</h2>
+        <h2>Update</h2>
         <form
-          action="/create_process"
+          action="/update_process"
           method="post"
           onSubmit={function (e) {
             e.preventDefault();
@@ -28,4 +28,4 @@ class CreateContent extends Component {
   }
 }
 
-export default CreateContent;
+export default UpdateContents;
