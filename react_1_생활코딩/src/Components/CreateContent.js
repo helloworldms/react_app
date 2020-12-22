@@ -10,8 +10,9 @@ class CreateContent extends Component {
           method="post"
           onSubmit={function (e) {
             e.preventDefault();
+            this.props.onSubmit(e.target.value);
 
-            this.props.onSubmit(e.target.title.value, e.target.desc.value);
+            console.log(e.target.value);
           }.bind(this)}
         >
           <p>
@@ -20,8 +21,7 @@ class CreateContent extends Component {
           <p>
             <textarea name="desc" placeholder="description"></textarea>
           </p>
-
-          <input type="submit"></input>
+          
         </form>
       </article>
     );
